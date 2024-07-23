@@ -57,11 +57,11 @@ $(OBJDIR)%.o: %.cpp $(INC)
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJDIR)
-	rm -rf *_shurbbery
 
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(RM) *_shrubbery
 
 # Removes objects and executables and remakes
 re: fclean all

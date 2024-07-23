@@ -1,11 +1,8 @@
 #include "AForm.hpp"
 
-// Default constructor
 AForm::AForm()
-	: _name("default"), _signed(false), _signGrade(150), _execGrade(150)
-{
-	return ;
-}
+	: _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
+	
 AForm::AForm(std::string name, int signGrade, int execGrade)
 	: _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
@@ -15,15 +12,10 @@ AForm::AForm(std::string name, int signGrade, int execGrade)
 		throw AForm::GradeTooLowException();
 }
 
+AForm::AForm(const AForm &other)
+	: _name(other._name), _signed(other._signed), _signGrade(other._signGrade),
+		_execGrade(other._execGrade){}
 
-// Copy constructor
-AForm::AForm(const AForm &other) : _name("default"), _signed(false), _signGrade(150), _execGrade(150)
-{
-	*this = other;
-	return ;
-}
-
-// Copy assignment overload
 AForm &AForm::operator=(const AForm &rhs)
 {
 	if (this != &rhs)
@@ -36,13 +28,7 @@ AForm &AForm::operator=(const AForm &rhs)
 	return (*this);
 }
 
-// Default destructor
-AForm::~AForm()
-{
-	return ;
-}
-
-// getters
+AForm::~AForm(){}
 
 const std::string AForm::getName(void) const
 {
@@ -68,7 +54,7 @@ int AForm::getExecGrade(void) const
 
 void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
-	if(bureaucrat.getGrade() > _signGrade)
+	if (bureaucrat.getGrade() > _signGrade)
 		throw AForm::GradeTooLowException();
 	_signed = true;
 	std::cout << bureaucrat.getName() << " signs " << _name << std::endl;
@@ -78,21 +64,22 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 
 const char *AForm::GradeTooHighException::what(void) const throw()
 {
-	return ("Grade is too high for this Aform");
+	return (RED "Grade is too high for this Aform" RESET);
 }
 
 const char *AForm::GradeTooLowException::what(void) const throw()
 {
-	return ("Grade is too low for this Aform");
+	return (RED "Grade is too low for this Aform" RESET);
 }
 
 const char *AForm::FormNotSignedException::what(void) const throw()
 {
-	return ("Form is not signed");
+	return (RED "Form is not signed" RESET);
 }
 
-std::ostream &operator<<(std::ostream &os, const AForm &Aform)
-{
-	os << "AForm " << Aform.getName() << " is " << (Aform.getSigned() ? "signed" : "not signed") << " and requires grade " << Aform.getSignGrade() << " to sign and grade " << Aform.getExecGrade() << " to execute";
-	return (os);
+std::ostream &operator<<(std::ostream &os, const AForm &aform) {
+    os << GREEN << "AForm " << aform.getName() << " is " << (aform.getSigned() ? "signed" : "not signed")
+       << " and requires grade " << aform.getSignGrade() << " to sign and grade " << aform.getExecGrade()
+       << " to execute" << RESET << std::endl;
+    return os;
 }

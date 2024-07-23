@@ -1,26 +1,12 @@
 
 #include "PresidentialPardonForm.hpp"
 
-// Default constructor
-PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5)
-{
-	_target = "default";
-	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
-}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5) , _target("default"){}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5)
-{
-	_target = target;
-	std::cout << "PresidentialPardonForm constructor called" << std::endl;
-}
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5), _target(target){}
 
-// Copy constructor
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
-{
-	*this = other;
-}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other), _target(other._target){}
 
-// Copy assignment overload
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs)
 {
 	if (this != &rhs)
@@ -31,11 +17,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-// Default destructor
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-	std::cout << "PresidentialPardonForm default destructor called" << std::endl;
-}
+PresidentialPardonForm::~PresidentialPardonForm() {}
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
@@ -43,5 +25,5 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 		throw GradeTooLowException();
 	if(!getSigned())
 		throw FormNotSignedException();
-	std::cout << _target << " has been pardoned by Zafod Beeblebrox" << std::endl;
+	std::cout << RED << _target << " has been pardoned by Zafod Beeblebrox" << RESET << std::endl;
 }
