@@ -27,8 +27,10 @@ RM		=	rm -rf
 
 # Dir and file names
 NAME	=	Bureaucrat
-SRCS	=	Bureaucrat.cpp Form.cpp main.cpp
-OBJS	=	$(SRCS:.cpp=.o)
+SRCS	=	Bureaucrat.cpp AForm.cpp main.cpp RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp PresidentialPardonForm.cpp
+OBJDIR	=	obj/
+OBJS	=	$(SRCS:%.cpp=$(OBJDIR)%.o)
 INC		=	$(wildcard *.hpp)
 
 
@@ -36,19 +38,23 @@ INC		=	$(wildcard *.hpp)
 #                                 TARGETS                                      #
 #------------------------------------------------------------------------------#
 
-all: $(NAME)
+all: $(OBJDIR) $(NAME)
+
+# Creates the output directory if it doesn't exist
+$(OBJDIR):
+	$(HIDE)mkdir -p $(OBJDIR)
 
 # Generates output file
 $(NAME): $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) -o $@
 
 # Compiles sources into objects
-.cpp.o: $(SRCS) $(INC)
+$(OBJDIR)%.o: %.cpp $(INC)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
 # Removes objects
 clean:
-	$(HIDE)$(RM) $(OBJS)
+	$(HIDE)$(RM) $(OBJDIR)
 
 # Removes objects and executables
 fclean: clean

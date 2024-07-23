@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:12:13 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/07/23 13:21:13 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/07/23 11:17:50 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ Bureaucrat::Bureaucrat()
 	std::cout << YELLOW <<"Default constructor called" << RESET << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade)
 {
+	_name = name;
 	_grade = -42;
 	try
 	{
@@ -40,7 +41,6 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	catch (GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
-		
 		return ;
 	}
 	_grade = grade;
@@ -59,7 +59,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)
 	{
-		const_cast<std::string &>(_name) = rhs.getName();
+		_name = rhs.getName();
 		_grade = rhs.getGrade();
 	}
 	return (*this);
@@ -118,9 +118,7 @@ void Bureaucrat::incrementGrade(void)
 	}
 	catch (GradeTooHighException &e)
 	{
-		// std::cout << "err in" << __FILE__ << " at line " << __LINE__ << " on function " << __FUNCTION__ << std::endl;
 		std::cout << e.what() << std::endl;
-		std::cout << RED <<"Setting grade to 1" << RESET << std::endl;
 		_grade = 1;
 	}
 	
@@ -139,7 +137,19 @@ void Bureaucrat::decrementGrade(void)
 	catch (GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
-		std::cout << RED <<"Setting grade to 150" << RESET << std::endl;
 		_grade = 150;
+	}
+}
+
+void Bureaucrat::signAForm(AForm &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << _name << " signs " << form.getName() << std::endl;
+	}
+	catch (AForm::GradeTooLowException &e)
+	{
+		std::cout << _name << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
 	}
 }

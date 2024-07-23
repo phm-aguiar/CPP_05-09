@@ -1,9 +1,11 @@
 #ifndef BUREAUCRAT_HPP_
 # define BUREAUCRAT_HPP_
 
+# include "AForm.hpp"
 # include <exception>
 # include <iostream>
 
+class	AForm;
 // collors
 
 # define RED "\033[1;31m"
@@ -30,6 +32,9 @@ class Bureaucrat
 	int getGrade(void) const;
 	void incrementGrade(void);
 	void decrementGrade(void);
+	void signAForm(AForm &form);
+	void executeForm(AForm const &form);
+
 	// class specific exceptions
 	class GradeTooHighException : public std::exception
 	{
@@ -43,7 +48,7 @@ class Bureaucrat
 	};
 
   private:
-	const std::string _name;
+	std::string _name;
 	int _grade;
 };
 
