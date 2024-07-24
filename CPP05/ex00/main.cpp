@@ -1,37 +1,84 @@
 #include "Bureaucrat.hpp"
 
-int printTestMsg(Bureaucrat &b, std::string msg){
-	std::cout << SEPBAR << std::endl;
-	std::cout << RED << msg << RESET << std::endl;
+void testFailIncrementGrade(void)
+{
+	std::cout << MAGENTA "Fail IncrementGrade test" RESET << std::endl;
+	Bureaucrat b("b", 1);
 	std::cout << b << std::endl;
-	std::cout << SEPBAR << std::endl;
-	std::cout << std::endl;
-	return (0);
+	try
+	{
+		b.incrementGrade();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	std::cout <<RED<< b <<RESET<< std::endl;
+}
+
+void testFailDecrementGrade(void)
+{
+	std::cout << MAGENTA "Fail DecrementGrade test" RESET << std::endl;
+	Bureaucrat b("b", 150);
+	std::cout << b << std::endl;
+	try
+	{
+		b.decrementGrade();
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	std::cout <<RED<< b <<RESET <<std::endl;
+}
+
+void testIncrementGrade(void)
+{
+	std::cout << MAGENTA "IncrementGrade test" RESET << std::endl;
+	Bureaucrat b("b", 150);
+	std::cout << b << std::endl;
+	try
+	{
+		b.incrementGrade();
+		std::cout << "Incremented" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << b << RESET <<std::endl;
+}
+
+void testDecrementGrade(void)
+{
+	std::cout <<MAGENTA "DecrementGrade test" RESET<< std::endl;
+	Bureaucrat b("b", 1);
+	std::cout << b << std::endl;
+	try
+	{
+		b.decrementGrade();
+		std::cout << "Decremented" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << b << RESET <<std::endl;
 }
 
 
 int main(void){
-	Bureaucrat b1;
-	printTestMsg(b1, "Test default constructor");
-	Bureaucrat b2("b2", 1);
-	printTestMsg(b2, "Test constructor with parameters");
-	std::cout << GREEN << "This is a exception message: " << RESET;
-	Bureaucrat b3("b3", 0);
-	printTestMsg(b3, "Test GradeTooHighException(grade -42 = Error)");
-	std::cout << GREEN << "This is a exception message: " << RESET;
-	Bureaucrat b4("b4", 151);
-	printTestMsg(b4, "Test GradeTooLowException(grade -42 = Error)");
-	Bureaucrat b5(b2);
-	printTestMsg(b5, "Test copy constructor");
-	Bureaucrat b6;
-	b6 = b2;
-	printTestMsg(b6, "Test copy assignment overload");
-	b6.decrementGrade();
-	printTestMsg(b6, "Test Valid decrementGrade");
-	b2.incrementGrade();
-	printTestMsg(b2, "Test incrementGrade");
-	Bureaucrat b7("b7", 150);
-	b7.decrementGrade();
-	printTestMsg(b7, "Test decrementGrade");
+	testFailIncrementGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testFailDecrementGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testIncrementGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testDecrementGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
 	return (0);
 }
