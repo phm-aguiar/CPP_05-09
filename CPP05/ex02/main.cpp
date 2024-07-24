@@ -6,7 +6,7 @@
 
 void	testPresidentialPardonForm(void)
 {
-	std::cout << "PresidentialPardonForm test" << std::endl;
+	std::cout << YELLOW << "PresidentialPardonForm test" << RESET << std::endl;
 	PresidentialPardonForm form("test");
 	Bureaucrat b("b", 1);
 	Bureaucrat b2("b2", 150);
@@ -45,7 +45,7 @@ void	testPresidentialPardonForm(void)
 
 void	testRobotomyRequestForm(void)
 {
-	std::cout << "RobotomyRequestForm test" << std::endl;
+	std::cout << YELLOW << "RobotomyRequestForm test" << RESET << std::endl;
 	RobotomyRequestForm form("test");
 	Bureaucrat b("b", 1);
 	Bureaucrat b2("b2", 150);
@@ -65,7 +65,7 @@ void	testRobotomyRequestForm(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "test: attempt to sign document without grade required " << std::endl;
+		std::cout << YELLOW << "test: attempt to sign document without grade required " << std::endl;
 		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 	form.beSigned(b);
@@ -84,7 +84,7 @@ void	testRobotomyRequestForm(void)
 
 void	testShrubberyCreationForm(void)
 {
-	std::cout << "ShrubberyCreationForm test" << std::endl;
+	std::cout << YELLOW << "ShrubberyCreationForm test" << RESET << std::endl;
 	ShrubberyCreationForm form("test");
 	Bureaucrat b("b", 1);
 	Bureaucrat b2("b2", 150);
@@ -125,7 +125,7 @@ void	testShrubberyCreationFileCreation(void)
 {
 	bool	fileExists;
 
-	std::cout << "Testing file creation by ShrubberyCreationForm" << std::endl;
+	std::cout << YELLOW << "Testing file creation by ShrubberyCreationForm" << RESET << std::endl;
 	ShrubberyCreationForm form("home");
 	Bureaucrat b("Director", 1);
 	form.beSigned(b);
@@ -135,9 +135,9 @@ void	testShrubberyCreationFileCreation(void)
 	std::cout << MAGENTA << "File created: " << (fileExists ? "Yes" : "No") << RESET << std::endl;
 }
 
-void testShrubberyCreationDuplicateFile(void)
+void	testShrubberyCreationDuplicateFile(void)
 {
-	std::cout << "Testing Duplicate file creation by ShrubberyCreationForm" << std::endl;
+	std::cout << YELLOW << "Testing Duplicate file creation by ShrubberyCreationForm" << RESET << std::endl;
 	ShrubberyCreationForm form("home");
 	ShrubberyCreationForm form2("home");
 	Bureaucrat b("Director", 1);
@@ -147,16 +147,20 @@ void testShrubberyCreationDuplicateFile(void)
 	form2.execute(b);
 }
 
-void testFormExecutionWithoutSignature() {
-    std::cout << "Testando a execução de formulário não assinado" << std::endl;
-    ShrubberyCreationForm form("garden");
-    Bureaucrat b("Manager", 1);
-    try {
-        form.execute(b);
-        std::cout << "Erro: Formulário não assinado foi executado." << std::endl;
-    } catch (std::exception& e) {
-        std::cout << "Sucesso: Tentativa de execução de formulário não assinado lançou exceção." << std::endl;
-    }
+void	testFormExecutionWithoutSignature(void)
+{
+	std::cout << YELLOW << "Testing unsigned form execution" << RESET << std::endl;
+	ShrubberyCreationForm form("garden");
+	Bureaucrat b("Manager", 1);
+	try
+	{
+		form.execute(b);
+		std::cout << "Error: Unsigned form was executed." << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Success: Attempt to execute an unsigned form threw an exception." << std::endl;
+	}
 }
 
 int	main(void)
