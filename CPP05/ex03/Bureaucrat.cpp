@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:12:13 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/07/23 17:58:27 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:08:48 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void Bureaucrat::decrementGrade(void)
     _grade++;
 }
 
-void Bureaucrat::signAForm(AForm &form)
+void Bureaucrat::signForm(AForm &form)
 {
     try
     {

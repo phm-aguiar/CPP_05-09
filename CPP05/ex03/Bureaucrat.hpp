@@ -26,16 +26,12 @@ class Bureaucrat
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &rhs);
 	~Bureaucrat();
-	// implementation specific methods
 	Bureaucrat(std::string name, int grade);
 	std::string getName(void) const;
 	int getGrade(void) const;
 	void incrementGrade(void);
 	void decrementGrade(void);
-	void signAForm(AForm &form);
-	void executeForm(AForm const &form);
-
-	// class specific exceptions
+	void signForm(AForm &form);
 	class GradeTooHighException : public std::exception
 	{
 		public:
