@@ -1,11 +1,7 @@
 #include "Form.hpp"
 
-// Default constructor
 Form::Form()
-	: _name("default"), _signed(false), _signGrade(150), _execGrade(150)
-{
-	return ;
-}
+	: _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
 Form::Form(std::string name, int signGrade, int execGrade)
 	: _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
@@ -15,15 +11,11 @@ Form::Form(std::string name, int signGrade, int execGrade)
 		throw Form::GradeTooLowException();
 }
 
-
-// Copy constructor
 Form::Form(const Form &other) : _name("default"), _signed(false), _signGrade(150), _execGrade(150)
 {
 	*this = other;
-	return ;
 }
 
-// Copy assignment overload
 Form &Form::operator=(const Form &rhs)
 {
 	if (this != &rhs)
@@ -36,13 +28,7 @@ Form &Form::operator=(const Form &rhs)
 	return (*this);
 }
 
-// Default destructor
-Form::~Form()
-{
-	return ;
-}
-
-// getters
+Form::~Form(){}
 
 const std::string Form::getName(void) const
 {
@@ -64,16 +50,12 @@ int Form::getExecGrade(void) const
 	return (_execGrade);
 }
 
-// methods
-
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
 	if(bureaucrat.getGrade() > _signGrade)
 		throw Form::GradeTooLowException();
 	_signed = true;
 }
-
-// exception classes
 
 const char *Form::GradeTooHighException::what(void) const throw()
 {

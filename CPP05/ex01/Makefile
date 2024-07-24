@@ -27,8 +27,7 @@ RM		=	rm -rf
 
 # Dir and file names
 NAME	=	Bureaucrat
-SRCS	=	Bureaucrat.cpp AForm.cpp main.cpp RobotomyRequestForm.cpp \
-			ShrubberyCreationForm.cpp PresidentialPardonForm.cpp
+SRCS	=	Bureaucrat.cpp Form.cpp main.cpp
 OBJDIR	=	obj/
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)%.o)
 INC		=	$(wildcard *.hpp)
