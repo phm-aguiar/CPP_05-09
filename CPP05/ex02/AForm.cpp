@@ -1,10 +1,8 @@
 #include "AForm.hpp"
 
-AForm::AForm()
-	: _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
-	
-AForm::AForm(std::string name, int signGrade, int execGrade)
-	: _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
+AForm::AForm()	: _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
+
+AForm::AForm(std::string name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
 	if (signGrade < 1 || execGrade < 1)
 		throw AForm::GradeTooHighException();
@@ -12,8 +10,7 @@ AForm::AForm(std::string name, int signGrade, int execGrade)
 		throw AForm::GradeTooLowException();
 }
 
-AForm::AForm(const AForm &other)
-	: _name(other._name), _signed(other._signed), _signGrade(other._signGrade),
+AForm::AForm(const AForm &other) : _name(other._name), _signed(other._signed), _signGrade(other._signGrade),
 		_execGrade(other._execGrade){}
 
 AForm &AForm::operator=(const AForm &rhs)
@@ -56,6 +53,11 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _signGrade)
 		throw AForm::GradeTooLowException();
+	if (_signed)
+	{
+		std::cout << "Form is already signed" << std::endl;
+		return ;
+	}
 	_signed = true;
 	std::cout << bureaucrat.getName() << " signs " << _name << std::endl;
 }
@@ -77,9 +79,10 @@ const char *AForm::FormNotSignedException::what(void) const throw()
 	return (RED "Form is not signed" RESET);
 }
 
-std::ostream &operator<<(std::ostream &os, const AForm &aform) {
-    os << GREEN << "AForm " << aform.getName() << " is " << (aform.getSigned() ? "signed" : "not signed")
-       << " and requires grade " << aform.getSignGrade() << " to sign and grade " << aform.getExecGrade()
-       << " to execute" << RESET << std::endl;
-    return os;
+std::ostream &operator<<(std::ostream &os, const AForm &aform)
+{
+	os << GREEN << "AForm " << aform.getName() << " is " << (aform.getSigned() ? "signed" : "not signed")
+		<< " and requires grade " << aform.getSignGrade() << " to sign and grade " << aform.getExecGrade()
+		<< " to execute" << RESET << std::endl;
+	return (os);
 }

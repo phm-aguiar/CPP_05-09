@@ -66,8 +66,44 @@ void testDecrementGrade(void)
 	std::cout << GREEN << b << RESET <<std::endl;
 }
 
+void testInvalidGrade(void)
+{
+	std::cout <<MAGENTA "Invalid Grade test" RESET<< std::endl;
+	try
+	{
+		Bureaucrat b("b", 0);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+	try
+	{
+		Bureaucrat b("b", 151);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}
+}
+
+void testValidGrade(void)
+{
+	std::cout <<MAGENTA "Valid Grade test" RESET<< std::endl;
+	Bureaucrat b("b", 1);
+	std::cout << GREEN << b << RESET <<std::endl;
+	Bureaucrat b2("b2", 150);
+	std::cout << GREEN << b2 << RESET <<std::endl;
+}
+
 
 int main(void){
+	testInvalidGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testValidGrade();
+	std::cout << std::endl;
+	std::cout << std::endl;
 	testFailIncrementGrade();
 	std::cout << std::endl;
 	std::cout << std::endl;

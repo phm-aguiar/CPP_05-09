@@ -20,6 +20,13 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 
 RobotomyRequestForm::~RobotomyRequestForm(){}
 
+void ft_usleep(int time)
+{
+	clock_t start = clock();
+	while (clock() < start + time)
+		;
+}
+
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	if (executor.getGrade() > getExecGrade())
@@ -27,6 +34,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	if (!getSigned())
 		throw FormNotSignedException();
 	std::cout << BLUE << "*drilling noises* "<< RESET;
+	ft_usleep(1000000);
 	std::srand(std::time(0));
 	if (std::rand() % 2)
 		std::cout << GREEN << _target << " has been robotomized successfully" << RESET << std::endl;

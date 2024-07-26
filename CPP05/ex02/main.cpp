@@ -163,6 +163,42 @@ void	testFormExecutionWithoutSignature(void)
 	}
 }
 
+void	testRobotomyRequestRandom(void)
+{
+	RobotomyRequestForm form("test1");
+	RobotomyRequestForm form2("test2");
+	RobotomyRequestForm form3("test3");
+	RobotomyRequestForm form4("test4");
+	RobotomyRequestForm form5("test5");
+	RobotomyRequestForm form6("test6");
+	Bureaucrat b("b", 1);
+	b.signForm(form);
+	b.signForm(form2);
+	b.signForm(form3);
+	b.signForm(form4);
+	b.signForm(form5);
+	b.signForm(form6);
+	form.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form2.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form3.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form4.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form5.execute(b);
+	for (int i = 10000000; i > 100; i/=2)
+		;
+	form6.execute(b);
+}
+
 int	main(void)
 {
 	testPresidentialPardonForm();
@@ -181,5 +217,8 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	testFormExecutionWithoutSignature();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testRobotomyRequestRandom();
 	return (0);
 }

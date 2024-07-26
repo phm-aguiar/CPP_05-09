@@ -15,7 +15,6 @@ class	AForm;
 # define MAGENTA "\033[1;35m"
 # define CYAN "\033[1;36m"
 # define RESET "\033[0m"
-# define SEPBAR "\033[1;36m-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\033[0m"
 
 // Class declaration
 class Bureaucrat
@@ -33,6 +32,7 @@ class Bureaucrat
 	void incrementGrade(void);
 	void decrementGrade(void);
 	void signForm(AForm &form);
+	void executeForm(AForm const &form);
 
 	// class specific exceptions
 	class GradeTooHighException : public std::exception

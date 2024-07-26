@@ -1,9 +1,7 @@
 #include "Form.hpp"
 
-Form::Form()
-	: _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
-Form::Form(std::string name, int signGrade, int execGrade)
-	: _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
+Form::Form() : _name("default"), _signed(false), _signGrade(150), _execGrade(150){}
+Form::Form(std::string name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
 	if (signGrade < 1 || execGrade < 1)
 		throw Form::GradeTooHighException();
@@ -52,8 +50,13 @@ int Form::getExecGrade(void) const
 
 void Form::beSigned(const Bureaucrat &bureaucrat)
 {
-	if(bureaucrat.getGrade() > _signGrade)
+	if (bureaucrat.getGrade() > _signGrade)
 		throw Form::GradeTooLowException();
+	if (_signed)
+	{
+		std::cout <<RED "Form is already signed" RESET<< std::endl;
+		return ;
+	}
 	_signed = true;
 }
 

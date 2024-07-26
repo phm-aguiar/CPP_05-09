@@ -52,6 +52,50 @@ void	testFailSingForm(void)
 	// std::cout << f << std::endl;
 }
 
+void testDuplicateSignature (void)
+{
+	Bureaucrat b("b", 1);
+	Form f("f", 1, 1);
+	std::cout << f << std::endl;
+	std::cout << b << std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << f << RESET <<std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << f << RESET <<std::endl;
+}
+
+void testFailDuplicateSignature(void){
+	Bureaucrat f("Fail", 150);
+	Bureaucrat t("manager", 1);
+	Form form("form", 1, 1);
+
+	std::cout << form << std::endl;
+	t.signForm(form);
+	std::cout << form << std::endl;
+	try
+	{
+		f.signForm(form);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}	
+}
+
 int	main(void)
 {
 	testCreateForm(0, 0);
@@ -70,5 +114,11 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << std::endl;
 	testSingForm();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testDuplicateSignature();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testFailDuplicateSignature();
 	return (0);
 }

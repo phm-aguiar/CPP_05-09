@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:12:13 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/07/24 12:38:15 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:50:04 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,18 @@ void Bureaucrat::signForm(AForm &form)
     }
 }	
 
+void Bureaucrat::executeForm(AForm const &form)
+{
+    try
+    {
+        form.execute(*this);
+    }
+    catch (AForm::GradeTooLowException &e)
+    {
+        std::cout << RED << _name << " cannot execute " << form.getName() << " because " << e.what() << RESET << std::endl;
+    }
+    catch (AForm::FormNotSignedException &e)
+    {
+        std::cout << RED << _name << " cannot execute " << form.getName() << " because " << e.what() << RESET << std::endl;
+    }
+}
