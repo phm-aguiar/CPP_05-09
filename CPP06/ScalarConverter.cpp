@@ -1,21 +1,29 @@
 
 #include "ScalarConverter.hpp"
 
-// Default constructor
-ScalarConverter::ScalarConverter() { return; }
+ScalarConverter::ScalarConverter() {}
 
-// Copy constructor
 ScalarConverter::ScalarConverter(const ScalarConverter &other) {
-  *this = other;
-  return;
+	  *this = other;
 }
 
-// Copy assignment overload
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs) {
-  (void)rhs;
-  return *this;
+	(void)rhs;
+	return *this;
 }
 
-// Default destructor
 ScalarConverter::~ScalarConverter() { return; }
 
+void ScalarConverter::convert(std::string input) {
+	std::cout << "Convert " << input << std::endl;
+	// try
+	// {
+	// 	int i = std::strtodi(input);
+	// 	std::cout << "int: " << i << std::endl;
+	// }
+	// catch (std::exception &e)
+	// {
+	// 	std::cerr << "int: impossible" << std::endl;
+	// }
+  
+}
