@@ -1,59 +1,124 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-int	printTestMsg(Bureaucrat &b, std::string msg)
-{
-	std::cout << SEPBAR << std::endl;
-	std::cout << RED << msg << RESET << std::endl;
-	std::cout << b << std::endl;
-	std::cout << SEPBAR << std::endl;
-	std::cout << std::endl;
-	return (0);
-}
-
-void	testForm(int signGrade, int execGrade)
+void	testCreateForm(int signGrade, int execGrade)
 {
 	try
 	{
 		Form f("f", signGrade, execGrade);
+		std::cout << GREEN << f << RESET << std::endl;
 	}
 	catch (Form::GradeTooHighException &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 	catch (Form::GradeTooLowException &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << RED << e.what() << RESET << std::endl;
 	}
 }
 
+void	testSingForm(void)
+{
+	Bureaucrat b("b", 1);
+	Form f("f", 1, 1);
+	std::cout << f << std::endl;
+	std::cout << b << std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << f << RESET <<std::endl;
+}
+
+void	testFailSingForm(void)
+{
+	Bureaucrat b("b", 150);
+	Form f("f", 1, 1);
+	std::cout << f << std::endl;
+	std::cout << b << std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	// std::cout << f << std::endl;
+}
+
+void testDuplicateSignature (void)
+{
+	Bureaucrat b("b", 1);
+	Form f("f", 1, 1);
+	std::cout << f << std::endl;
+	std::cout << b << std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << f << RESET <<std::endl;
+	try
+	{
+		b.signForm(f);
+	}
+	catch (Form::GradeTooLowException &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	std::cout << GREEN << f << RESET <<std::endl;
+}
+
+void testFailDuplicateSignature(void){
+	Bureaucrat f("Fail", 150);
+	Bureaucrat t("manager", 1);
+	Form form("form", 1, 1);
+
+	std::cout << form << std::endl;
+	t.signForm(form);
+	std::cout << form << std::endl;
+	try
+	{
+		f.signForm(form);
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << std::endl;
+	}	
+}
 
 int	main(void)
 {
-	Form f1;
-	Form f2("Approval of nuclear attack.", 1, 1);
-	Form f3("proof of transaction", 100, 100);
-	Bureaucrat b2("b2", 1);
-	printTestMsg(b2, "Test constructor with parameters");
-	std::cout << GREEN << "This is a exception message: " << RESET;
-	Bureaucrat b3("b3", 0);
-	printTestMsg(b3, "Test GradeTooHighException(grade -42 = Error)");
-	std::cout << GREEN << "This is a exception message: " << RESET;
-	Bureaucrat b4("b4", 151);
-	printTestMsg(b4, "Test GradeTooLowException(grade -42 = Error)");
-	testForm(0, 0);
-	testForm(151, 151);
-	testForm(1, 151);
-	testForm(151, 1);
-	testForm(0, 1);
-	testForm(1, 0);
-	testForm(0, 150);
-	testForm(150, 0);
-	testForm(150, 150);
-	Bureaucrat b5("b5", 10);
-	std::cout << f2 << std::endl;
-	b5.signForm(f2);
-	std::cout << f3 << std::endl;
-	b2.signForm(f3);
+	testCreateForm(0, 0);
+	testCreateForm(151, 151);
+	testCreateForm(1, 151);
+	testCreateForm(151, 1);
+	testCreateForm(0, 1);
+	testCreateForm(1, 0);
+	testCreateForm(0, 150);
+	testCreateForm(150, 0);
+	testCreateForm(150, 150);
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	testFailSingForm();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testSingForm();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testDuplicateSignature();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	testFailDuplicateSignature();
 	return (0);
 }

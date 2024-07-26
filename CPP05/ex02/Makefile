@@ -27,7 +27,10 @@ RM		=	rm -rf
 
 # Dir and file names
 NAME	=	Bureaucrat
-SRCS	=	Bureaucrat.cpp Form.cpp main.cpp
+SRCS	=	Bureaucrat.cpp AForm.cpp main.cpp \
+			PresidentialPardonForm.cpp \
+			RobotomyRequestForm.cpp \
+			ShrubberyCreationForm.cpp
 OBJDIR	=	obj/
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)%.o)
 INC		=	$(wildcard *.hpp)
@@ -58,6 +61,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(RM) *_shrubbery
 
 # Removes objects and executables and remakes
 re: fclean all

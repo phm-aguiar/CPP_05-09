@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:12:13 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/07/24 12:17:43 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:50:04 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
         throw GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name), _grade(other._grade) {}
+Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name), _grade(other._grade)
+{}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
@@ -76,4 +77,32 @@ void Bureaucrat::decrementGrade(void)
     if (_grade >= 150)
         throw GradeTooLowException();
     _grade++;
+}
+
+void Bureaucrat::signForm(AForm &form)
+{
+    try
+    {
+        form.beSigned(*this);
+    }
+    catch (AForm::GradeTooLowException &e)
+    {
+        std::cout << RED << _name << " cannot sign " << form.getName() << " because " << e.what() << RESET << std::endl;
+    }
+}	
+
+void Bureaucrat::executeForm(AForm const &form)
+{
+    try
+    {
+        form.execute(*this);
+    }
+    catch (AForm::GradeTooLowException &e)
+    {
+        std::cout << RED << _name << " cannot execute " << form.getName() << " because " << e.what() << RESET << std::endl;
+    }
+    catch (AForm::FormNotSignedException &e)
+    {
+        std::cout << RED << _name << " cannot execute " << form.getName() << " because " << e.what() << RESET << std::endl;
+    }
 }

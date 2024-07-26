@@ -1,11 +1,11 @@
 #ifndef BUREAUCRAT_HPP_
 # define BUREAUCRAT_HPP_
 
+# include "AForm.hpp"
 # include <exception>
 # include <iostream>
-#include "Form.hpp"
 
-class Form;
+class	AForm;
 // collors
 
 # define RED "\033[1;31m"
@@ -15,7 +15,6 @@ class Form;
 # define MAGENTA "\033[1;35m"
 # define CYAN "\033[1;36m"
 # define RESET "\033[0m"
-# define SEPBAR "\033[1;36m-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\033[0m"
 
 class Bureaucrat
 {
@@ -29,7 +28,8 @@ class Bureaucrat
 	int getGrade(void) const;
 	void incrementGrade(void);
 	void decrementGrade(void);
-	void signForm(Form &form);
+	void signForm(AForm &form);
+	void executeForm(AForm const &form);
 	class GradeTooHighException : public std::exception
 	{
 		public:
@@ -48,4 +48,4 @@ class Bureaucrat
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
-#endif // BUREAUCRAT_HPP_
+#endif

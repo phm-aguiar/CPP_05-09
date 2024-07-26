@@ -26,8 +26,8 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	Bureaucrat
-SRCS	=	Bureaucrat.cpp Form.cpp main.cpp
+NAME	=	convert
+SRCS	=	ScalarConverter.cpp main.cpp
 OBJDIR	=	obj/
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)%.o)
 INC		=	$(wildcard *.hpp)
