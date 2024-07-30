@@ -1,8 +1,6 @@
 
 #include "ScalarConverter.hpp"
 
-static bool		ftStrIsNumber(const std::string &str);
-static bool		ftStrIsLiteral(const std::string &str);
 static void		ftValidateInput(const std::string &input);
 static void		toChar(const std::string &conv);
 static void		toInt(const std::string &conv);
@@ -88,17 +86,6 @@ const char *ScalarConverter::InvalidInputException::what() const throw()
 	return (RED "Invalid input" RESET);
 }
 
-static bool	ftStrIsNumber(const std::string &str)
-{
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (!std::isdigit(str[i]) && str[i] != '.' && str[i] != 'f'
-			&& str[i] != '-' && str[i] != '+')
-			return (false);
-	}
-	return (true);
-}
-
 static bool	ftStrIsLiteral(const std::string &str)
 {
 	if (str == "nan" || str == "inf" || str == "-inf" || str == "+inf"
@@ -107,24 +94,60 @@ static bool	ftStrIsLiteral(const std::string &str)
 	return (false);
 }
 
-static bool	ftStrIsChar(const std::string &str)
+static bool	isChar(const std::string &str)
 {
 	if (str.length() == 1 && !std::isdigit(str[0]))
 		return (true);
 	return (false);
 }
 
+static bool	ftStrIsNumber(const std::string &str)
+{
+	bool hasDot, hasSign, hasF;
+	hasDot = hasSign = hasF = false;
+	if (str.empty())
+		throw ScalarConverter::InvalidInputException();
+	if (isChar(str) || ftStrIsLiteral(str))
+		return (true);
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (!std::isdigit(str[i]) && str[i] != '.' && str[i] != 'f'
+			&& str[i] != '-' && str[i] != '+')
+			throw ScalarConverter::InvalidInputException();
+		if (str[i] == '.')
+		{
+			if (hasDot)
+				throw ScalarConverter::InvalidInputException();
+			hasDot = true;
+		}
+		if (str[i] == 'f')
+		{
+			if (hasF || i != str.length() - 1)
+				throw ScalarConverter::InvalidInputException();
+			hasF = true;
+		}
+		if (str[i] == '-' || str[i] == '+')
+		{
+			if (hasSign || i != 0)
+				throw ScalarConverter::InvalidInputException();
+			hasSign = true;
+		}
+	}
+	return (true);
+}
+
 static void	ftValidateInput(const std::string &input)
 {
 	if (input.empty())
 		throw ScalarConverter::InvalidInputException();
-	if (!ftStrIsNumber(input) && !ftStrIsLiteral(input) && !ftStrIsChar(input))
+	if (!ftStrIsNumber(input))
 		throw ScalarConverter::InvalidInputException();
 }
 
+
 static double	convertToDouble(const std::string &conv)
 {
-	if (ftStrIsChar(conv))
+	if (isChar(conv))
 	{
 		return (static_cast<double>(conv[0]));
 	}
