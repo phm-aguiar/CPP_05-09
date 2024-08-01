@@ -26,10 +26,9 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	convert
-SRCS	=	ScalarConverter.cpp main.cpp
-OBJDIR	=	obj/
-OBJS	=	$(SRCS:%.cpp=$(OBJDIR)%.o)
+NAME	=	serialization
+SRCS	=	main.cpp Data.cpp Serializer.cpp
+OBJS	=	$(SRCS:.cpp=.o)
 INC		=	$(wildcard *.hpp)
 
 
@@ -37,23 +36,19 @@ INC		=	$(wildcard *.hpp)
 #                                 TARGETS                                      #
 #------------------------------------------------------------------------------#
 
-all: $(OBJDIR) $(NAME)
-
-# Creates the output directory if it doesn't exist
-$(OBJDIR):
-	$(HIDE)mkdir -p $(OBJDIR)
+all: $(NAME)
 
 # Generates output file
 $(NAME): $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) -o $@
 
 # Compiles sources into objects
-$(OBJDIR)%.o: %.cpp $(INC)
+.cpp.o: $(SRCS) $(INC)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
 # Removes objects
 clean:
-	$(HIDE)$(RM) $(OBJDIR)
+	$(HIDE)$(RM) $(OBJS)
 
 # Removes objects and executables
 fclean: clean
@@ -61,6 +56,3 @@ fclean: clean
 
 # Removes objects and executables and remakes
 re: fclean all
-
-run: all clean
-	$(HIDE)./$(NAME) a
