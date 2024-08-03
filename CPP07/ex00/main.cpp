@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:14:03 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/08/03 11:39:23 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/08/03 11:45:01 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	testMax(void)
 	else
 		std::cout << "max(float) failed!" << std::endl;
 	if (max(c, d) == 4.4)
-		std::cout << "max(double) passed!" << std::endl;
+		std::cout << "max(double) passed!\n " << std::endl;
 	else
 		std::cout << "max(double) failed!" << std::endl;
 	if (::max(s1, s2) == "42sp")
