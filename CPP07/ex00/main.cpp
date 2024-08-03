@@ -6,13 +6,12 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:14:03 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/08/02 13:42:19 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/08/03 11:39:23 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "whatever.hpp"
 
-// Função para testar a função swap
 void	testSwap(void)
 {
 	int		a = 5, b = 10;
@@ -21,17 +20,17 @@ void	testSwap(void)
 	std::cout << "a: " << a << " b: " << b << std::endl;
 	swap(a, b);
 	if (a == 10 && b == 5)
-		std::cout << "swap(int) passou!" << std::endl;
+		std::cout << "swap(int) passed!" << std::endl;
 	else
-		std::cout << "swap(int) falhou!" << std::endl;
+		std::cout << "swap(int) failed!" << std::endl;
 	std::cout << "a: " << a << " b: " << b << std::endl;
 	std::cout << std::endl;
 	std::cout << "x: " << x << " y: " << y << std::endl;
 	swap(x, y);
 	if (x == 2.2 && y == 1.1)
-		std::cout << "swap(double) passou!" << std::endl;
+		std::cout << "swap(double) passed!" << std::endl;
 	else
-		std::cout << "swap(double) falhou!" << std::endl;
+		std::cout << "swap(double) failed!" << std::endl;
 	std::cout << "x: " << x << " y: " << y << std::endl;
 	std::cout << std::endl;
 }
@@ -44,24 +43,23 @@ void	testMin(void)
 	std::string s1 = "42", s2 = "42sp";
 	
 	if (min(a, b) == 3)
-		std::cout << "min(int) passou!" << std::endl;
+		std::cout << "min(int) passed!" << std::endl;
 	else
-		std::cout << "min(int) falhou!" << std::endl;
+		std::cout << "min(int) failed!" << std::endl;
 	if (min(x, y) == 2.2f)
-		std::cout << "min(double) passou!" << std::endl;
+		std::cout << "min(double) passed!" << std::endl;
 	else
-		std::cout << "min(double) falhou!" << std::endl;
+		std::cout << "min(double) failed!" << std::endl;
 	if (min(c, d) == 3.3)
-		std::cout << "min(float) passou!" << std::endl;
+		std::cout << "min(float) passed!" << std::endl;
 	else
-		std::cout << "min(float) falhou!" << std::endl;
+		std::cout << "min(float) failed!" << std::endl;
 	if (::min(s1, s2) == "42")
-		std::cout << "min(string) passou!" << std::endl;
+		std::cout << "min(string) passed!" << std::endl;
 	else
-		std::cout << "min(string) falhou!" << std::endl;
+		std::cout << "min(string) failed!" << std::endl;
 }
 
-// Função para testar a função max
 void	testMax(void)
 {
 	int		a = 3, b = 4;
@@ -70,21 +68,21 @@ void	testMax(void)
 	std::string s1 = "42", s2 = "42sp";
 
 	if (max(a, b) == 4)
-		std::cout << "max(int) passou!" << std::endl;
+		std::cout << "max(int) passed!" << std::endl;
 	else
-		std::cout << "max(int) falhou!" << std::endl;
+		std::cout << "max(int) failed!" << std::endl;
 	if (max(x, y) == 5.5f)
-		std::cout << "max(float) passou!" << std::endl;
+		std::cout << "max(float) passed!" << std::endl;
 	else
-		std::cout << "max(float) falhou!" << std::endl;
+		std::cout << "max(float) failed!" << std::endl;
 	if (max(c, d) == 4.4)
-		std::cout << "max(double) passou!" << std::endl;
+		std::cout << "max(double) passed!" << std::endl;
 	else
-		std::cout << "max(double) falhou!" << std::endl;
+		std::cout << "max(double) failed!" << std::endl;
 	if (::max(s1, s2) == "42sp")
-		std::cout << "max(string) passou!" << std::endl;
+		std::cout << "max(string) passed!" << std::endl;
 	else
-		std::cout << "max(string) falhou!" << std::endl;
+		std::cout << "max(string) failed!" << std::endl;
 }
 
 int	main(void)

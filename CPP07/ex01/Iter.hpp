@@ -5,7 +5,7 @@
 # include <string>
 
 template <typename T> void iter(T *array, size_t size,
-	void (*function)(T const &))
+	void (*function)(const T&))
 {
 	if (!array || !function)
 	{
