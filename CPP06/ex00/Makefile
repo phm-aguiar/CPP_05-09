@@ -63,4 +63,4 @@ fclean: clean
 re: fclean all
 
 run: all clean
-	$(HIDE)./$(NAME) a
+	$(HIDE)./$(NAME) 42

@@ -83,7 +83,16 @@ const char *ScalarConverter::NonDisplayableException::what() const throw()
 
 const char *ScalarConverter::InvalidInputException::what() const throw()
 {
-	return (RED "Invalid input" RESET);
+	std::string str = "char:   ";
+	str += RED "impossible\n" RESET;
+	str += "int:    ";
+	str += RED "impossible\n" RESET;
+	str += "float:  ";
+	str += RED "impossible\n" RESET;
+	str += "double: ";
+	str += RED "impossible" RESET;
+	std::cerr << str;
+	return ("");
 }
 
 static bool	ftStrIsLiteral(const std::string &str)
