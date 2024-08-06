@@ -26,7 +26,7 @@ CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -I.
 RM		=	rm -rf
 
 # Dir and file names
-NAME	=	
+NAME	=	mutantstack
 SRCS	=	main.cpp
 OBJS	=	$(SRCS:.cpp=.o)
 INC		=	$(wildcard *.hpp)
