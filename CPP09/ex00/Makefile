@@ -27,7 +27,7 @@ RM		=	rm -rf
 
 # Dir and file names
 NAME	=	btc
-SRCS	=	main.cpp
+SRCS	=	main.cpp BitcoinExchange.cpp
 OBJS	=	$(SRCS:.cpp=.o)
 INC		=	$(wildcard *.hpp)
 
