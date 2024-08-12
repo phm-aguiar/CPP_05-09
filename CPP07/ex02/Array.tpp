@@ -6,31 +6,31 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 15:43:18 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/08/02 17:13:55 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:25:37 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
-template <typename T> const char *Array<T>::EmptyArrayException::what() const throw()
+template <class T> const char *Array<T>::EmptyArrayException::what() const throw()
 {
 	return (RED "cannot access an empty array" RESET);
 }
 
-template <typename T> const char *Array<T>::OutOfLimitsException::what() const throw()
+template <class T> const char *Array<T>::OutOfLimitsException::what() const throw()
 {
 	return (RED "index out of limits" RESET);
 }
 
-template <typename T> Array<T>::Array(void) : _array(NULL), _size(0) {}
+template <class T> Array<T>::Array(void) : _array(NULL), _size(0) {}
 
-template <typename T> Array<T>::Array(unsigned int n) :  _size(n){
+template <class T> Array<T>::Array(unsigned int n) :  _size(n){
 	if (n == 0)
 		return ;
 	_array = new T[n];
 }
 
-template <typename T> Array<T>::Array(const Array &other) : _array(NULL),
+template <class T> Array<T>::Array(const Array &other) : _array(NULL),
 	_size(other._size)
 {
 	if (_size == 0)
@@ -41,7 +41,7 @@ template <typename T> Array<T>::Array(const Array &other) : _array(NULL),
 		_array[i] = other._array[i];
 }
 
-template <typename T> Array<T> &Array<T>::operator=(const Array &rhs)
+template <class T> Array<T> &Array<T>::operator=(const Array &rhs)
 {
 	if (this == &rhs)
 		return (*this);
@@ -54,7 +54,7 @@ template <typename T> Array<T> &Array<T>::operator=(const Array &rhs)
 	return (*this);
 }
 
-template <typename T> T &Array<T>::operator[](unsigned int index)
+template <class T> T &Array<T>::operator[](unsigned int index)
 {
 	if (_size == 0)
 		throw EmptyArrayException();
@@ -63,10 +63,10 @@ template <typename T> T &Array<T>::operator[](unsigned int index)
 	return (_array[index]);
 }
 
-template <typename T> Array<T>::~Array(void)
+template <class T> Array<T>::~Array(void)
 {
 	if (_size > 0)
 		delete[] _array;
 }
 
-template <typename T> unsigned int Array<T>::size() const {return (_size);}
+template <class T> unsigned int Array<T>::size() const {return (_size);}

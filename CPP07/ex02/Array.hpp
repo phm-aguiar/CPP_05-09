@@ -10,7 +10,7 @@
 # define MAGENTA "\033[1;35m"
 # define RESET "\033[0m"
 // Class declaration
-template <typename T> class Array
+template <class T> class Array
 {
   public:
 	Array();
