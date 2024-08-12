@@ -6,7 +6,7 @@
 /*   By: phenriq2 <phenriq2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 15:43:18 by phenriq2          #+#    #+#             */
-/*   Updated: 2024/08/02 17:25:37 by phenriq2         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:43:09 by phenriq2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,40 @@ template <class T> Array<T>::Array(unsigned int n) :  _size(n){
 	_array = new T[n];
 }
 
-template <class T> Array<T>::Array(const Array &other) : _array(NULL),
-	_size(other._size)
+template <typename T> Array<T>::Array(const Array &other)
 {
-	if (_size == 0)
-		return ;
-	delete[] _array;
-	_array = new T[_size];
-	for (unsigned int i = 0; i < _size; i++)
-		_array[i] = other._array[i];
+    _size = other._size;
+
+    if (_size > 0)
+    {
+        _array = new T[_size];
+        for (unsigned int i = 0; i < _size; i++)
+            _array[i] = other._array[i];
+    }
+    else
+        _array = NULL;
 }
+
 
 template <class T> Array<T> &Array<T>::operator=(const Array &rhs)
 {
-	if (this == &rhs)
-		return (*this);
-	if (_size > 0)
-		delete[] _array;
-	_array = new T[rhs._size];
-	_size = rhs._size;
-	for (unsigned int i = 0; i < _size; i++)
-		_array[i] = rhs._array[i];
-	return (*this);
+    if (this == &rhs)
+        return (*this); 
+    delete[] _array;
+    _size = rhs._size;
+    if (_size > 0)
+    {
+        _array = new T[_size];
+        for (unsigned int i = 0; i < _size; i++)
+            _array[i] = rhs._array[i];
+    }
+    else
+        _array = NULL;
+    return *this;
 }
 
-template <class T> T &Array<T>::operator[](unsigned int index)
+
+template <typename T> T &Array<T>::operator[](unsigned int index)
 {
 	if (_size == 0)
 		throw EmptyArrayException();
@@ -65,8 +74,7 @@ template <class T> T &Array<T>::operator[](unsigned int index)
 
 template <class T> Array<T>::~Array(void)
 {
-	if (_size > 0)
-		delete[] _array;
+	delete[] _array;
 }
 
 template <class T> unsigned int Array<T>::size() const {return (_size);}
